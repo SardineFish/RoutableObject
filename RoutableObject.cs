@@ -39,7 +39,7 @@ namespace RoutableObject
                     if (!property.DeclaringType.IsSubclassOf(typeof(RoutableObject)))
                         throw new UnreachableException(path);
 
-                    return (property.GetValue(this) as RoutableObject).Call(path, param);
+                    return (property.GetValue(this) as RoutableObject).Call(subPath, param);
                 }
 
                 var field = GetField(pathList[0]);
@@ -47,7 +47,7 @@ namespace RoutableObject
                 {
                     if (!field.DeclaringType.IsSubclassOf(typeof(RoutableObject)))
                         throw new UnreachableException(path);
-                    return (field.GetValue(this) as RoutableObject).Call(path, param);
+                    return (field.GetValue(this) as RoutableObject).Call(subPath, param);
                 }
 
                 throw new MemberNotFoundException(this, pathList[0]);
